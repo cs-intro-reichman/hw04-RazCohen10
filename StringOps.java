@@ -26,17 +26,112 @@ public class StringOps {
     }
 
     public static String capVowelsLowRest (String string) {
-        // Write your code here:
-        return "";
+        char c;
+		String ReturnString = "";
+		for (int i = 0; i < string.length(); i++)
+		{
+			c = string.charAt(i);
+			if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U')
+			{
+				
+				c = CharToCap(c);
+			}
+			else
+			{
+				c = CharToLower(c);
+			}
+			ReturnString += c;
+		}
+		return ReturnString;
     }
-
+	
     public static String camelCase (String string) {
-        // Write your code here:
-        return "";
+        char PrevChar;
+		char CurrentChar;
+		String ReturnString = "";
+		
+		int i = 0;
+		while (string.charAt(i) == ' ')
+		{
+			i++;
+		}
+		string = string.substring(i);
+
+		if (string.length() > 0)
+		{
+			CurrentChar = string.charAt(0);
+			ReturnString += CharToLower(CurrentChar);
+		}
+		
+		for (int j = 1; j < string.length(); j++)
+		{
+			PrevChar = string.charAt(j - 1);
+			CurrentChar = string.charAt(j);
+			if (PrevChar == ' ')
+			{
+				if (CurrentChar != ' ')
+				{
+					ReturnString += CharToCap(CurrentChar);
+				}
+			}
+			else
+			{
+				if (CurrentChar != ' ')
+				{
+					ReturnString += CharToLower(CurrentChar);
+				}
+			}
+			
+		}
+		
+		return ReturnString;
     }
 
     public static int[] allIndexOf (String string, char chr) {
-        // Write your code here:
-        return new int[1];
+        int ArraySize = 0;
+		for (int i = 0; i < string.length(); i++)
+		{
+			if (string.charAt(i) == chr)
+			{
+				ArraySize++;
+			}
+		}
+		
+		int[] AllIndexArray = new int[ArraySize];
+		int ArrayPlacement = 0;
+		for (int j = 0; j < string.length(); j++)
+		{
+			if (string.charAt(j) == chr)
+			{
+				AllIndexArray[ArrayPlacement] = j;
+				ArrayPlacement++;
+			}
+		}
+		
+		return AllIndexArray;
     }
+	
+	private static char CharToLower (char c)
+	{
+		if ((int) c >= 65 && (int) c <= 90)
+		{
+			return (char) ((int) c + 32);
+		}
+		else
+		{
+			return c;
+		}
+	}
+	
+	private static char CharToCap (char c)
+	{
+		if ((int) c >= 97 && (int) c <= 122)
+		{
+			return (char) ((int) c - 32);
+		}
+		else
+		{
+			return c;
+		}
+	}
 }
